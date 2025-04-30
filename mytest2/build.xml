@@ -1,0 +1,42 @@
+<?xml version ="1.0"?>
+<project default="jar" name="MyTest2">
+<description>A simple Java project</description>
+<property name="srcDir" location="src"/>
+<property name="buildDir" location="build"/>
+<property name="jarDir" location="jar"/>
+<property name="libDir" location="lib"/>
+<property name="manifest.file" value="${basedir}/META-INF/MANIFEST.MF"/>
+
+<target name="init">
+<tstamp/>
+<mkdir dir="${buildDir}"/>
+<mkdir dir="${jarDir}"/> 
+</target>
+
+<target name="compile" depends="init">
+<echo>${libDir}/Test1.jar"</echo>
+<javac srcdir="${srcDir}" destdir="${buildDir}" classpath="${libDir}/Test1.jar">
+</javac>           
+</target>
+
+<target name="jar" depends="compile">
+    <jar destfile="${jarDir}/Test2.jar" basedir="${buildDir}">
+    <manifest>
+            <!--attribute name="Built-by" value="${user.name}"/-->
+            <attribute name="Main-Class" value="Test2"/>
+            <attribute name="Class-Path" value="Test2.jar lib/Test1.jar"/>
+    </manifest>
+    </jar>
+    </target>
+
+    <target name="clean">
+            <delete dir="${buildDir}"/>
+            <delete dir="${jarDir}"/>
+    </target>
+</project>
+
+
+
+
+
+

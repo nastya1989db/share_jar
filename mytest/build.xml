@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<project default="jar" name="MyTest">
+    <description>
+        A simple project introducing the use of descriptive tags in Ant build files.
+    </description>
+    <property name="srcDir" value="src"/>
+    <!-- Указываем директорию для собранного проекта Ок -->
+    <property name="buildDir" value="build"/>
+    <property name="jarDir" value="jar"/>
+
+    <target name="init">
+    <tstamp/>  <!-- создаем временную директорию -->
+    <mkdir dir = "${buildDir}"/>
+    <mkdir dir = "${jarDir}"/>
+    </target>
+
+    <target name="compile" depends="init">
+    <javac srcdir = "${srcDir}" destdir = "${buildDir}"/>
+    </target>
+
+    <target name="jar" depends="compile">
+    <jar destfile="${jarDir}/Test1.jar" basedir="${buildDir}">
+    <manifest>
+            <!--attribute name="Built-by" value="${user.name}"/-->
+            <attribute name="Main-Class" value="Test1"/>
+    </manifest>
+    </jar>
+    <jar destfile="${jarDir}/Test1.jar" basedir="${buildDir}"/>
+    </target>
+
+    <target name="clean">
+            <delete dir="${buildDir}"/>
+            <delete dir="${jarDir}"/>
+    </target>
+</project>
+
+
+
+        
